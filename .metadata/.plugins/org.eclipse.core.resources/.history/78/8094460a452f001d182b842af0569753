@@ -1,0 +1,40 @@
+package polymorphism;
+
+public class SamsungTV implements TV{
+	private SonySpeaker speaker; // 삼성tv에 sony를 injection함
+	private int price; 
+	
+	public void initMethod() {
+		// 객체의 초기화 작업 메소드
+		System.out.println("객체 초기화 작업을 처리함");
+	}
+	public void destroyMethod() {
+		// 객체의 초기화 작업 메소드
+		System.out.println("객체 삭제 전에 처리할 로직");
+	}
+	
+	public SamsungTV() {
+		System.out.println("====> SamsungTV(1) 객체 생성...");
+	}
+	public SamsungTV(SonySpeaker speaker) {
+		System.out.println("====> SamsungTV(2) 객체 생성...");
+		this.speaker = speaker;
+	}
+	
+	@Override
+	public void powerOn() {
+		System.out.println("삼성티비가 켜졌습니다.");
+	}
+	@Override
+	public void powerOff() {
+		System.out.println("삼성티비가 꺼졌습니다.");
+	}
+	@Override
+	public void volumeUp() {
+		speaker.volumeUp();
+	}
+	@Override
+	public void volumeDown() {
+		speaker.volumeDown();
+	}
+}

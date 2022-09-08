@@ -1,0 +1,22 @@
+package polymorphism;
+
+/*
+ * GenericXmlApplicationContext
+ */
+
+import org.springframework.context.annotation.Bean;
+
+public class TVUser {
+
+	public static void main(String[] args) {
+		// 1. spring 컨테이너(여기서는 applicationContext.xml)를 구동한다.
+		// 2. spring 컨테이너로부터 필요한 객체를 요청한다.
+		TV tv = (TV)factory.getBean("tv"); // xml에서 만든 id를 검색
+		tv.powerOn();
+		tv.powerOff();
+		tv.volumeUp();
+		tv.volumeDown();
+		// 3. spring 컨테이너를 종료한다.
+	}
+
+}

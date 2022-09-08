@@ -1,0 +1,12 @@
+package com.global.ioc.injection;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class CollectionBeanClient {
+	public static void main(String[] args) {
+		AbstractApplicationContext factory = new GenericXmlApplicationContext("applicationContext.xml");
+		CollectionBean bean = (CollectionBean)factory.getBean("collectionBean"); // bean을 가져왔음
+		bean.getAddressList();
+	}
+}

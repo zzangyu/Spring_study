@@ -1,0 +1,15 @@
+package polymorphism;
+
+public class SamsungSpeaker implements Speaker {
+	
+	@Override
+	public void volumeUp() {
+		System.out.println("AppleSpeaker --- 소리 올린다.");
+	}
+
+	@Override
+	public void volumeDown() {
+		System.out.println("AppleSpeaker --- 소리 내린다.");
+	}
+
+}

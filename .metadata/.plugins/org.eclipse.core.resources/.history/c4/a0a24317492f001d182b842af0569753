@@ -1,0 +1,19 @@
+package polymorphism;
+
+public class AppleSpeaker implements Speaker {
+	
+	public AppleSpeaker() {
+		System.out.println("===> Apple Speaker °´Ã¼ »ý¼º");
+	}
+	
+	@Override
+	public void volumeUp() {
+
+	}
+
+	@Override
+	public void volumeDown() {
+
+	}
+
+}
