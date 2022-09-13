@@ -1,0 +1,9 @@
+package com.global.biz.common;
+
+public class JDBCUtill {
+	
+	public static Connection getConnection() {
+		
+	}
+	
+}

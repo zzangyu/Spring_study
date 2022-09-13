@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- <bean id="tv" class="polymorphism.SamsungTV" init-method="initMethod" destroy-method="destroyMethod"/> -->
+	<!-- <bean id="tv" class="polymorphism.SamsungTV" scope="prototype" />  -->
+	<!--lazy-init="true": bean을 미리 생성하지 않고 요청이 들어오면 그때 생성하라는 체크 -->
+	<!-- singletone 객체 하나로 돌려씀 -->
+	<!-- prototype 객체 여러개 생성, 요청마다 해줌 -->
+	
+	<!-- 삼성 티비에 소니 스피커 생성자인젝션 -->
+	<!-- <bean id="tv" class="polymorphism.SamsungTV">
+		<constructor-arg index="0" ref="apple" />
+		<constructor-arg index="1" value="123000" />
+		<property name="speaker" ref="apple" />
+		<property name="price" value="10000000" />
+	</bean> -->
+	<bean id="tv" class="polymorphism.SamsungTV" p:speaker-ref="apple" p:price="2700000"/>
+	<!-- <bean id="sony" class="polymorphism.SonySpeaker" /> -->
+	<bean id="apple" class="polymorphism.AppleSpeaker" />
+	
+	<!-- com.global.ioc.injection -->
+	<!-- <bean id="collectionBean" class="com.global.ioc.injection.CollectionBean"> List임
+		<property name="addressList">
+			<list>
+				<value>서울특별시 강남구 역삼동</value>
+				<value>서울특별시 성동구 행당동</value>
+			</list>
+		</property>
+	</bean> -->
+	<bean id="collectionBean" class="com.global.ioc.injection.CollectionBean">
+		<property name="addressList">
+			<!-- <set value-type="java.lang.String">
+				<value>서울특별시 강남구 역삼동</value>
+				<value>서울특별시 성동구 행당동</value>
+			</set> -->
+			
+		</property>
+	</bean>
+</beans>
+
+<!-- jsp에서 서블릿이라고 생각해야한다. -->

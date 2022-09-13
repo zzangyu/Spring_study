@@ -1,0 +1,13 @@
+package com.global.biz.board;
+
+public class BoardVO {
+	
+	private int seq;
+	private String title;
+	private String writer;
+	private String content;
+	private Date regDate;
+	private String 
+	private String 
+	
+}

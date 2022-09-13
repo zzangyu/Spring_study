@@ -1,0 +1,12 @@
+package com.global.biz.common;
+
+import java.sql.Connection;
+
+public class JDBCUtill {
+	
+	public static Connection getConnection() {
+		
+		return ;
+	}
+	
+}
