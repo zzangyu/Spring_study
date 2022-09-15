@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+
 public class BoardServiceClient {
 
 	public static void main(String[] args) {
@@ -16,10 +17,11 @@ public class BoardServiceClient {
 		
 		// 3. 글 등록 기능 테스트
 		BoardVO vo = new BoardVO();
+//		vo.setSeq(0);
 		vo.setTitle("메롱");
 		vo.setWriter("나는 한찬규");
 		vo.setContent("집에 가고싶어");
-		boardService.insertBoard(vo);
+//		boardService.insertBoard(vo);
 		
 		// 4. 글 목록 검색 기능 테스트
 		List<BoardVO> boardList = boardService.getBoardList(vo);

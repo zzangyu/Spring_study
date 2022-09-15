@@ -3,8 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	
+	<!-- aop 어노테이션 -->
+   	<context:component-scan base-package="com.global.biz"></context:component-scan>
+ 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+   	
 
 	<!-- <bean id="tv" class="polymorphism.SamsungTV" init-method="initMethod" destroy-method="destroyMethod"/> -->
 	<!-- <bean id="tv" class="polymorphism.SamsungTV" scope="prototype" />  -->
@@ -55,18 +62,113 @@
 		</property>
 	</bean> -->
 	
-	<context:component-scan base-package="com.global.biz"></context:component-scan>
+	<!-- db 연결 + 메소드 사용 -->
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan> -->
+	<!-- <bean id="userService" class="com.global.biz.user.impl.UserServiceImpl">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<bean id="userDAO" class="com.global.biz.user.impl.UserDAO" /> -->
+	
 	<!-- DataSource 설정 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
 		<property name="username" value="scott" />
 		<property name="password" value="tiger" />
-	</bean>
+	</bean> -->
 	
 	<!-- <bean class="polymorphism.SonySpeaker"></bean> -->
 	
+	<!-- aop 사용 -->
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="log" class="com.global.biz.common.LogAdvice"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/> 
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/> 
+		<aop:aspect ref="log">
+			<aop:before method="printLog" pointcut-ref="getPointcut" />
+			<aop:after method="printLog" pointcut-ref="getPointcut" />
+		</aop:aspect>
+	</aop:config> -->
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="log4j" class="com.global.biz.common.Log4jAdvice"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/> 
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/> 
+		<aop:aspect ref="log4j">
+			<aop:before method="printLogging" pointcut-ref="getPointcut" />
+			<aop:after method="printLogging" pointcut-ref="getPointcut" />
+		</aop:aspect>
+	</aop:config> -->
 	
+	<!-- aop beforeAdvice -->
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="before" class="com.global.biz.common.BeforeAdvice"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/> 
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/> 
+		<aop:aspect ref="before">
+			<aop:before method="beforeLog" pointcut-ref="allPointcut"/>
+		</aop:aspect>
+	</aop:config> -->
+	
+	<!-- aop returningAdvice -->
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="afterReturning" class="com.global.biz.common.AfterReturningAdvice"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/> 
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/> 
+		<aop:aspect ref="afterReturning">
+			<aop:after-returning method="afterLog" pointcut-ref="allPointcut"/> ==> 매개변수 없을 때
+			<aop:after-returning method="afterLog" returning="returnObj" pointcut-ref="allPointcut"/> ==> 매개변수 있을 때
+		</aop:aspect>
+	</aop:config> -->
+	
+	<!-- aop after-throwing -->
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="afterThrowing" class="com.global.biz.common.AfterThrowingAdvice"></bean>
+	<aop:config>
+		<aop:aspect ref="afterThrowing">
+			<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/> 
+			<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/> 
+			<aop:after-throwing method="exceptionLog" pointcut-ref="allPointcut"/> ==> 매개변수 없을 때
+			<aop:after-throwing method="exceptionLog" throwing="exceptionObj" pointcut-ref="allPointcut"/> ==> 매개변수 있을 때
+		</aop:aspect>
+	</aop:config> -->
+	
+	<!-- aop afterAdvice -->
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="after" class="com.global.biz.common.AfterAdvice"></bean>    
+   	<aop:config>
+    	<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/>
+    	<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/>
+    	<aop:aspect ref="after">
+       		<aop:after method="finallyLog" pointcut-ref="allPointcut"/>
+    	</aop:aspect>
+   	</aop:config>    -->
+   	
+	<!-- aop aroundAdvice 얘는 joinPoint --> 
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="around" class="com.global.biz.common.AroundAdvice"></bean>    
+   	<aop:config>
+    	<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/>
+    	<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/>
+    	<aop:aspect ref="around">
+       		<aop:around method="aroundLog" pointcut-ref="allPointcut"/>
+    	</aop:aspect>
+   	</aop:config> -->
+	<!-- aop aroundAdvice --> 
+	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
+	<bean id="aroundJP" class="com.global.biz.common.AroundAdvice"></bean>    
+   	<aop:config>
+    	<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/>
+    	<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/>
+    	<aop:aspect ref="aroundJP">
+       		<aop:around method="aroundLogJoinPoint" pointcut-ref="allPointcut"/>
+    	</aop:aspect>
+   	</aop:config> -->
+   	
+   	
 </beans>
 
 <!-- jsp에서 서블릿이라고 생각해야한다. -->
