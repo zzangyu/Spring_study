@@ -4,9 +4,41 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	
+	<!-- DataSource 설정 -->
+	<context:property-placeholder location="classpath:config/database.properties"/>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- Spring JDBC 설정 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- Transaction 설정 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="txPointcut"/> 
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+	</aop:config>
+	
 	
 	<!-- aop 어노테이션 -->
    	<context:component-scan base-package="com.global.biz"></context:component-scan>
@@ -68,14 +100,6 @@
 		<property name="userDAO" ref="userDAO"></property>
 	</bean>
 	<bean id="userDAO" class="com.global.biz.user.impl.UserDAO" /> -->
-	
-	<!-- DataSource 설정 -->
-	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
-		<property name="username" value="scott" />
-		<property name="password" value="tiger" />
-	</bean> -->
 	
 	<!-- <bean class="polymorphism.SonySpeaker"></bean> -->
 	
@@ -157,7 +181,7 @@
        		<aop:around method="aroundLog" pointcut-ref="allPointcut"/>
     	</aop:aspect>
    	</aop:config> -->
-	<!-- aop aroundAdvice --> 
+	<!-- aop aroundAdvice -->
 	<!-- <context:component-scan base-package="com.global.biz"></context:component-scan>
 	<bean id="aroundJP" class="com.global.biz.common.AroundAdvice"></bean>    
    	<aop:config>

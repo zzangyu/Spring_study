@@ -1,9 +1,18 @@
 package com.global.biz.common;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
+@Service
+@Aspect
 public class AroundAdvice {
+	
+	@Pointcut("execution(* com.global.biz..*Impl.*(..))")
+	public void allPointcut(){}
 	
 	public Object aroundLog(ProceedingJoinPoint pjp) throws Throwable {
 		// before와 after 둘 다 받음
@@ -14,6 +23,7 @@ public class AroundAdvice {
 		return returnObj;
 	}
 	
+	@Around("allPointcut()")
 	public Object aroundLogJoinPoint(ProceedingJoinPoint pjp) throws Throwable {
 		// before와 after 둘 다 받음
 		String method = pjp.getSignature().getName();
