@@ -3,9 +3,28 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
+	<!-- 인코딩 설정 -->
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	
+	<!-- action-servlet을 presentation-layer로 바꿨을 때는 이걸 해야한다. (통상적으로 많이 쓰이는거라 바꿔주는데 안바꿔줘도됨) -->
 	<servlet>
 		<servlet-name>action</servlet-name>
-		<servlet-class>com.global.view.controller.DispatcherServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/presentation-layer.xml</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
