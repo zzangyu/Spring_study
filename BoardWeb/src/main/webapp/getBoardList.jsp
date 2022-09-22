@@ -13,7 +13,7 @@
 	<div align="center">
 		<h1>글 목록</h1>
 		<h3>
-			테스트님 환영합니다.... <a href="logout.do">Log-out</a>
+			${userName }님 환영합니다.... <a href="logout.do">Log-out</a>
 		</h3>
 		
 		<form action="getBoardList.do" method="post">
@@ -21,8 +21,9 @@
 				<tr>
 					<td align="right">
 						<select name="searchCondition">
-							<option value="TITLE">제목</option>
-							<option value="CONTENT">내용</option>
+							<c:forEach var="option" items="${conditionMap }">
+								<option value="${option.value }">${option.key }</option>
+							</c:forEach>
 						</select>
 						<input type="text" name="searchKeyword">
 						<input type="submit" value="검색">

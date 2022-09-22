@@ -16,7 +16,17 @@
 		<filter-name>characterEncoding</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
+
+	<!-- xml 통합 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<!-- 리스너 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+		
 	<!-- action-servlet을 presentation-layer로 바꿨을 때는 이걸 해야한다. (통상적으로 많이 쓰이는거라 바꿔주는데 안바꿔줘도됨) -->
 	<servlet>
 		<servlet-name>action</servlet-name>
@@ -30,4 +40,7 @@
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	
+	
 </web-app>
