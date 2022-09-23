@@ -9,3 +9,5 @@ C:\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\328519
 \BoardWeb\src\main\java
 C:\dev_spring\sts\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2806564625.index
 \BoardWeb\src\main\java
+C:\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3071887559.index
+\BoardWeb\src\main\java
