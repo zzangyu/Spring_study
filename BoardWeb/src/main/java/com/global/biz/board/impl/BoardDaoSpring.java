@@ -21,6 +21,8 @@ public class BoardDaoSpring { // 두번째 방법
 	private final String BOARD_DELETE = "delete board where seq=?";
 	private final String BOARD_GET = "select * from board where seq=?";
 	private final String BOARD_LIST = "select * from board order by seq desc";
+	private final String BOARD_LIST_T = "select * from board where title like '%' || ? || '%' order by seq desc";
+	private final String BOARD_LIST_C = "select * from board where content like '%' || ? || '%' order by seq desc";
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -63,7 +65,13 @@ public class BoardDaoSpring { // 두번째 방법
 	public List<BoardVO> getBoardList(BoardVO vo) {
 		System.out.println("======> Spring JDBC로 getBoardList() 기능을 처리");
 //		return getJdbcTemplate().query(BOARD_LIST, new BoardRowMapper()); 첫번쨰 방법
-		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());// 두번째 방법
+		Object[] args = {vo.getSearchKeyword()};
+		if(vo.getSearchCondition().equals("TITLE")) {
+			return jdbcTemplate.query(BOARD_LIST_T, args, new BoardRowMapper());
+		} else if(vo.getSearchCondition().equals("CONTENT")) {
+			return jdbcTemplate.query(BOARD_LIST_C, args, new BoardRowMapper());
+		}
+		return null;// 두번째 방법
 	}
 	
 }

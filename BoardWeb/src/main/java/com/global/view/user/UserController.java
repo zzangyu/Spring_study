@@ -3,6 +3,7 @@ package com.global.view.user;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,10 @@ public class UserController {
 
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(UserVO vo, UserDAO userDAO, HttpSession session) {
+		
+		if(vo.getId() == null || vo.getId().equals("")) {
+			throw new IllegalArgumentException("아이디는 반드시 입력하셔야 로그인 할 수 있습니다.");
+		}
 		
 		UserVO user = userDAO.getUser(vo);
 		

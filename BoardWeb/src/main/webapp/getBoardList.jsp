@@ -31,6 +31,7 @@
 				</tr>
 			</table>
 		</form>
+		<%-- 검색 기능 종료 --%>
 		<%-- 목록 --%>
 		<table border="1" cellpading="0" cellspacing="0" width="700">
 			<tr>
