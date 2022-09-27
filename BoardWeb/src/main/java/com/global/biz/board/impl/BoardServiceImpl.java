@@ -14,7 +14,8 @@ import com.global.biz.board.BoardVO;
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
-	private BoardDaoSpring boardDaoSpring;
+	private BoardDAOMybatis boardDAO;
+//	private BoardDaoSpring boardDaoSpring;
 //	private LogAdvice logAdvice;
 //	private Log4jAdvice log4jAdvice;
 
@@ -30,32 +31,32 @@ public class BoardServiceImpl implements BoardService {
 //			 throw new IllegalArgumentException("0번 글은 등록하실 수 없습니다."); 
 //		}
 		
-		boardDaoSpring.insertBoard(vo);
-		boardDaoSpring.insertBoard(vo);
+		boardDAO.insertBoard(vo);
+		boardDAO.insertBoard(vo);
 	}
 
 	@Override
 	public void updateBoard(BoardVO vo) {
 //		log4jAdvice.printLogging();
-		boardDaoSpring.updateBoard(vo);
+		boardDAO.updateBoard(vo);
 	}
 
 	@Override
 	public void deleteBoard(BoardVO vo) {
 //		log4jAdvice.printLogging();
-		boardDaoSpring.deleteBoard(vo);
+		boardDAO.deleteBoard(vo);
 	}
 
 	@Override
 	public BoardVO getBoard(BoardVO vo) {
 //		log4jAdvice.printLogging();
-		return boardDaoSpring.getBoard(vo);
+		return boardDAO.getBoard(vo);
 	}
 
 	@Override
 	public List<BoardVO> getBoardList(BoardVO vo) {
 //		log4jAdvice.printLogging();
-		return boardDaoSpring.getBoardList(vo);
+		return boardDAO.getBoardList(vo);
 	}
 
 }

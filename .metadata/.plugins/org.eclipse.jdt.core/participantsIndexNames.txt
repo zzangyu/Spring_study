@@ -5,6 +5,8 @@ C:\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\198557
 \BoardWeb\src\main\java
 C:\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2806564625.index
 \BoardWeb\src\main\java
+C:\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3728165170.index
+\MybatisProject\src\main\java
 C:\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3285195898.index
 \BoardWeb\src\main\java
 C:\dev_spring\sts\spring_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2806564625.index
